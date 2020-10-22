@@ -70,7 +70,7 @@ finished = False
 points = 0
 FPS_counter = 0
 time = randint(300, 500)
-amount_of_figs = randint(1, 3)
+amount_of_figs = randint(2, 4)
 batch_points = 0
 batch_errors = 0
 errors = 0
@@ -220,7 +220,7 @@ while not finished:
             batch_points = 0
     FPS_counter += 1
     if FPS_counter == 1:
-        mode = randint(3, 3) #new mode
+        mode = randint(1, 3) #new mode
         time = randint(300, 500) #new time of motion
         a = randint(7, 8) #new order of rects
     
@@ -235,4 +235,55 @@ screen.blit(result_2, (100, 200))
 screen.blit(result_3, (100, 240))
 pygame.display.update()
 pygame.time.wait(550)
+rank = open("ranking.txt", 'a+')
+b = randint(1, 999)
+if b > 0 and b < 10:
+    if points>=0 and points<10:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'     '+str(points)+'    '+str(combos)+'       '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'     '+str(points)+'    '+str(combos)+'     '+str(errors)+'\n')
+    elif points>9 and points<100:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'     '+str(points)+'   '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'     '+str(points)+'   '+str(combos)+'     '+str(errors)+'\n')
+    else:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'     '+str(points)+'    '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'     '+str(points)+'  '+str(combos)+'     '+str(errors)+'\n')
+elif b > 9 and b < 100:
+    if points>=0 and points<10:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'    '+str(points)+'    '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'    '+str(points)+'    '+str(combos)+'     '+str(errors)+'\n')
+    elif points>9 and points<100:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'    '+str(points)+'   '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'    '+str(points)+'   '+str(combos)+'     '+str(errors)+'\n')
+    else:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'    '+str(points)+'  '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'    '+str(points)+'  '+str(combos)+'     '+str(errors)+'\n')
+else:
+    if points>=0 and points<10:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'   '+str(points)+'    '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'   '+str(points)+'    '+str(combos)+'    '+str(errors)+'\n')
+    elif points>9 and points<100:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'   '+str(points)+'   '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'   '+str(points)+'   '+str(combos)+'     '+str(errors)+'\n')
+    else:
+        if combos >=0 and combos<10:
+            rank.write('P_'+str(b)+'   '+str(points)+'  '+str(combos)+'      '+str(errors)+'\n')
+        else:
+            rank.write('P_'+str(b)+'   '+str(points)+'  '+str(combos)+'     '+str(errors)+'\n')
+rank.close()
 pygame.quit()
