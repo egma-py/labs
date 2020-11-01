@@ -1,0 +1,10 @@
+BLACK_d = (0, 0, 0)
+WHITE_d = (255, 255, 255)
+GREEN_d = (76, 187, 23)
+RED_d = (176, 16, 48)
+BACKGROUND_d = (77, 77, 77)
+#BUTTON_COLOR_d = ()
+#TEXT_COLOR_d = ()
+#TARGET_COLORS_d = []
+#GUN_COLOR_d = ()
+#BULLET_COLOR_d = ()
