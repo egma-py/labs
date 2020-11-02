@@ -6,7 +6,8 @@ BACKGROUND_l = (172, 179, 184)
 MENU_COLOR_l = (0, 0, 204)
 LOC_COLOR_l = (150, 75, 0)
 GUN_l = (0, 0, 0)
+TARGET_COLORS_l = [RED_l, GREEN_l, MENU_COLOR_l, BLACK_l, (255, 255, 0)]
 #BUTTON_COLOR_l = ()
 #TEXT_COLOR_l = ()
-#TARGET_COLORS_l = []
+
 #BULLET_COLOR = ()

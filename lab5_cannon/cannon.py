@@ -1,7 +1,7 @@
-from random import randrange as rnd, choice
 from light_theme import *
 from dark_theme import *
 
+import random as rnd
 import pygame as pg
 import pygame.draw as pgd
 import math as m
@@ -14,15 +14,16 @@ What to do:
         background(will be done when all will be done)
         main menu (DONE)
     Objects:
-        gun (DONE except cannon length)
-        target
-        bullet(DONE except targets)
+        gun (DONE wxcept power)
+        gun health
+        target(DONE except making bombs)
+        bullet(DONE)
     colors
 """
 
 class Main_menu:
     def __init__(self, size_x):
-        self.size_x = main_menu_size
+        self.size_x = size_x
         
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -70,7 +71,7 @@ class Main_menu:
 
 class Settings:
     def __init__(self, size_x):
-        self.size_x = settings_size
+        self.size_x = size_x
     
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -136,7 +137,7 @@ class Settings:
     
 class Gt_menu:
     def __init__(self, size_x):
-        self.size_x = gt_menu_size
+        self.size_x = size_x
     
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -188,7 +189,7 @@ class Gt_menu:
         
 class D_menu:
     def __init__(self, size_x):
-        self.size_x = d_menu_size
+        self.size_x = size_x
     
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -231,7 +232,7 @@ class D_menu:
         
 class L_menu:
     def __init__(self, size_x):
-        self.size_x = l_menu_size
+        self.size_x = size_x
     
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -265,7 +266,7 @@ class L_menu:
         
 class T_menu:
     def __init__(self, size_x):
-        self.size_x = t_menu_size
+        self.size_x = size_x
     
     def appear(self, size_x):
         pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
@@ -297,13 +298,13 @@ class T_menu:
             return False
 
 
-class Time_bar: #FIXME include theme
+class Time_bar:
     color_factor = 255
     color = ((255 - color_factor), color_factor, 50)
     def __init__(self, sec, length, background_color):
-        self.background_color = BACKGROUND_l
-        self.sec = FPS * game_time
-        self.length = size[0]
+        self.background_color = background_color
+        self.sec = FPS * sec
+        self.length = length
             
     def appear(self, length):
         pgd.rect(screen, Time_bar.color, [(0, 0), (int(self.length), 5)])
@@ -325,11 +326,11 @@ class Time_bar: #FIXME include theme
         
 class Gun:
     def __init__(self, v, x, y, cannon_l, cannon_w):
-        self.v = v_gun
-        self.x = x_gun
-        self.y = y_gun
-        self.cannon_l = l_gun
-        self.cannon_w = w_gun
+        self.v = v
+        self.x = x
+        self.y = y
+        self.cannon_l = cannon_l
+        self.cannon_w = cannon_w
 
     def app(self, x, y, cannon_l, cannon_w, pos):
         if (self.y-pos[1]) <= 0:
@@ -351,8 +352,7 @@ class Gun:
             arctg = m.atan((pos[0]-self.x)/(self.y-pos[1]))
             x2 = int(self.x + self.cannon_l*m.sin(arctg))
             y2 = int(self.y - self.cannon_l*m.cos(arctg))
-        pgd.rect(screen, BACKGROUND_l, [(self.x-25, self.y-20), (50, 25)])
-        pgd.line(screen, BACKGROUND_l, (self.x, self.y), (x2, y2), self.cannon_w)
+        pgd.rect(screen, BACKGROUND_l, [(self.x-30, self.y-30), (60, 35)])
         
     def right(self, x, y, v):
         self.x += self.v
@@ -365,7 +365,25 @@ class Gun:
         
         
 class Target:
-    pass
+    def __init__(self):
+        self.x = rnd.randint(30, size[0]-30)
+        self.y = rnd.randint(30, int(size[1]*0.45))
+        self.r = rnd.randint(10, 20)
+        self.v = rnd.randint(5, 10)
+        self.alive = True
+        self.color = TARGET_COLORS_l[5-rnd.randint(1, 5)]
+        
+    def app(self, x, y, r):
+        pgd.circle(screen, self.color, (self.x, self.y), self.r)
+        
+    def disapp(self, x, y, r):
+        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
+        
+    def change(self, x, v, r):
+        self.x += self.v
+        if self.x >= size[0]-self.r or self.x <= self.r:
+            self.v = -self.v
+            self.x += self.v
 
 
 class Bullet:
@@ -378,16 +396,17 @@ class Bullet:
             arctg = m.atan((pos[0]-obj.x)/(obj.y-pos[1]))
             self.x = int(obj.x + obj.cannon_l*m.sin(arctg))
             self.y = int(obj.y - obj.cannon_l*m.cos(arctg))
-        self.vx = -int(15*m.sin(arctg))
-        self.vy = int(15*m.cos(arctg))
-        self.t = 180
+        self.vx = -int(20*m.sin(arctg))
+        self.vy = int(20*m.cos(arctg))
+        self.t = t
+        self.r = bullet_radius
         
 
     def app(self, x, y):
-        pgd.circle(screen, RED_l, (self.x, self.y), bullet_radius)
+        pgd.circle(screen, RED_l, (self.x, self.y), self.r)
 
     def disapp(self, x, y):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), bullet_radius)
+        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
         
     def change(self, x, y, vx, vy, obj):
         self.x -= self.vx
@@ -398,9 +417,13 @@ class Bullet:
             self.y -= self.vy
            
 
+class Bomb:
+    pass
+
+
 class Location:
     def __init__(self, plain_type):
-        self.plain_type = loc_mode
+        self.plain_type = plain_type
         self.k = 0.75
         self.size = size[1]
         
@@ -419,11 +442,6 @@ class Location:
 
 class Background_menu:
     pass
-
-
-def clear(a):
-    for elem in a:
-        a.remove(elem)
 
 
 def menu_appear(obj, x):
@@ -451,13 +469,27 @@ def buttons_activated(statement):
     else:
         return False
 
+
+def target_move(obj):
+    obj.disapp(obj.x, obj.y, obj.r)
+    obj.change(obj.x, obj.y, obj.r)
+    obj.app(obj.x, obj.y, obj.r)
     
+
 def bullet_move(obj, obj1):
     obj.disapp(obj.x, obj.y)
     obj.change(obj.x, obj.y, obj.vx, obj.vy, obj1)
     obj.app(obj.x, obj.y)
     
-       
+    
+def hittest(bullett, targett):
+    s = m.sqrt((bullett.x-targett.x)**2+(bullett.y-targett.y)**2)
+    if s < (bullett.r + targett.r):
+        return True
+    else:
+        return False
+    
+    
 pg.init()
 pg.font.init()
 
@@ -504,20 +536,10 @@ settings_time = 2*FPS
 v_gun = 5
 x_gun = size[0]//2
 y_gun = int(size[1]*0.75)-5
-l_gun = 20
-w_gun = 6
+l_gun = 30
+w_gun = 8
 g = 1
-
-#defining objects in the menu
-time_bar = Time_bar(game_time, size[0], BACKGROUND_l)
-main_menu = Main_menu(main_menu_size)
-settings_menu = Settings(settings_size)
-gt_menu = Gt_menu(gt_menu_size)
-d_menu = D_menu(d_menu_size)
-l_menu = L_menu(l_menu_size)
-t_menu = T_menu(t_menu_size)
-gun = Gun(v_gun, x_gun, y_gun, l_gun, w_gun)
-bullets = []
+tg_amounts = 5
 
 #defining default modes
 finished = False
@@ -532,7 +554,20 @@ l_menu_mode = False
 t_menu_mode = False
 loc_mode = True
 
-#objects in the game
+#defining objects in the game
+time_bar = Time_bar(game_time, size[0], BACKGROUND_l)
+main_menu = Main_menu(main_menu_size)
+settings_menu = Settings(settings_size)
+gt_menu = Gt_menu(gt_menu_size)
+d_menu = D_menu(d_menu_size)
+l_menu = L_menu(l_menu_size)
+t_menu = T_menu(t_menu_size)
+gun = Gun(v_gun, x_gun, y_gun, l_gun, w_gun)
+bullets = []
+targets = []
+for i in range(tg_amounts):
+    targets.append(Target())
+bombs = []
 loc = Location(loc_mode)
 screen.fill(BACKGROUND_l)
 
@@ -659,6 +694,12 @@ while not finished:
     if game_mode and main_menu.size_x == 0: #game
         time_bar_begin(time_bar, size[0], game_time)
         gun.app(gun.x, gun.y, gun.cannon_l, gun.cannon_w, mouse_pos)
+        for elem in targets:
+            target_move(elem)
+            if not elem.alive:
+                elem.disapp(elem.x, elem.y, elem.r)
+                targets.remove(elem)
+                targets.append(Target())
         for elem in bullets:
             if elem.t > 0:
                 elem.t -= 1
@@ -668,6 +709,10 @@ while not finished:
                 elem.disapp(elem.x, elem.y)
             else:
                 bullets.remove(elem)
+            for targett in targets:
+                if hittest(targett, elem):
+                    targett.alive = False
+                    elem.t = 0
         loc.appear(loc_mode)
         pg.display.update()
     if time_bar.length == 0 and not main_menu_mode:
@@ -676,6 +721,9 @@ while not finished:
         for elem in bullets:
             elem.disapp(elem.x, elem.y)
             elem.t = 0
+        for elem in targets:
+            elem.disapp(elem.x, elem.y, elem.r)
+            elem.alive = False
         gun.disapp(gun.x, gun.y, gun.cannon_l, gun.cannon_w, mouse_pos)
         gun.x, gun.y, gun.v = x_gun, y_gun, v_gun
         time_bar.length = size[0]
