@@ -1,5 +1,4 @@
-from light_theme import *
-from dark_theme import *
+from colors import *
 
 import random as rnd
 import pygame as pg
@@ -10,7 +9,7 @@ import math as m
 What to do:
     Time bar (DONE)
     Menu:
-        settings (DONE except theme and location)
+        settings (DONE except location)
         background(will be done when all will be done)
         main menu (DONE)
         points(aver. +1, spec +2, enemy kill +5)
@@ -20,27 +19,28 @@ What to do:
         target(DONE)
         bullet(DONE)
         enemy (DONE)
-    colors
+    colors(DONE)
 """
 
 class Main_menu:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
         
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #begin button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
         screen.blit(begin, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+8))
         #settings button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
         screen.blit(settings, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+58))
         #Exit button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2+100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2+100), (100, 35)])
         screen.blit(exitt, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+108))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -74,27 +74,28 @@ class Main_menu:
 class Settings:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
     
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #game time button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
         screen.blit(game_duration, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-92))
         #difficulty button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
         screen.blit(difficulty_txt, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-42))
         #theme button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
         screen.blit(theme, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+8))
         #location button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
         screen.blit(location, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+58))
         #return button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2+100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2+100), (100, 35)])
         screen.blit(returnn, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+108))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -140,24 +141,25 @@ class Settings:
 class Gt_menu:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
     
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #10s button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
         screen.blit(sec10, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-92))
         #20s button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
         screen.blit(sec20, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-42))
         #30s button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
         screen.blit(sec30, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+8))
         #60s button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2+50), (100, 35)])
         screen.blit(sec60, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+58))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -192,21 +194,22 @@ class Gt_menu:
 class D_menu:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
     
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #easy button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
         screen.blit(easy, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-92))
         #medium button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
         screen.blit(medium, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-42))
         #hard button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2), (100, 35)])
         screen.blit(hard, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2+8))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -235,18 +238,19 @@ class D_menu:
 class L_menu:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
     
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #plains button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
         screen.blit(plain, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-92))
         #hills button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
         screen.blit(hills, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-42))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -269,18 +273,19 @@ class L_menu:
 class T_menu:
     def __init__(self, size_x):
         self.size_x = size_x
+        self.theme = 0
     
     def appear(self, size_x):
-        pgd.rect(screen, MENU_COLOR_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, MENU_COLOR[self.theme], [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
         #dark button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-100), (100, 35)])
         screen.blit(dark, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-92))
         #light button
-        pgd.rect(screen, RED_l, [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
+        pgd.rect(screen, BUTTON_COLOR[self.theme], [(size[0]-int(1.5*self.size_x-210), size[1]//2-50), (100, 35)])
         screen.blit(light, (size[0]-int(1.5*self.size_x-210)+8, size[1]//2-42))
         
     def disappear(self, size_x):
-        pgd.rect(screen, BACKGROUND_l, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
+        pgd.rect(screen, BACKGROUND, [(size[0]-int(self.size_x), 0), (int(self.size_x), size[1])])
     
     def change_size_a(self, size_x):
         self.size_x += size[0]/(2*FPS)
@@ -307,6 +312,7 @@ class Time_bar:
         self.background_color = background_color
         self.sec = FPS * sec
         self.length = length
+        self.theme = 0
             
     def appear(self, length):
         pgd.rect(screen, Time_bar.color, [(0, 0), (int(self.length), 5)])
@@ -336,7 +342,7 @@ class Gun:
         self.lc = cannon_l
         self.wc = cannon_w
         self.hp = hp
-        self.color = list(GUN_l)
+        self.color = list(GUN_COLOR)
 
     def app(self, x, y, cannon_l, cannon_w, pos):
         if (self.y-pos[1]) <= 0:
@@ -347,8 +353,8 @@ class Gun:
             arctg = m.atan((pos[0]-self.x)/(self.y-pos[1]))
             x2 = int(self.x + self.lc*m.sin(arctg))
             y2 = int(self.y - self.lc*m.cos(arctg))
-        pgd.rect(screen, GUN_l, [(self.x-self.l, self.y-self.w//2), (int(2*self.l), self.w)])
-        pgd.rect(screen, GUN_l, [(self.x-self.l, self.y-self.w//2-self.w), (3, self.w)])
+        pgd.rect(screen, GUN_COLOR, [(self.x-self.l, self.y-self.w//2), (int(2*self.l), self.w)])
+        pgd.rect(screen, GUN_COLOR, [(self.x-self.l, self.y-self.w//2-self.w), (3, self.w)])
         pgd.line(screen, self.color, (self.x, self.y-self.w//2), (x2, y2), self.wc)
         
     def disapp(self, x, y, cannon_l, cannon_w, pos):
@@ -360,17 +366,17 @@ class Gun:
             arctg = m.atan((pos[0]-self.x)/(self.y-pos[1]))
             x2 = int(self.x + self.lc*m.sin(arctg))
             y2 = int(self.y - self.lc*m.cos(arctg))
-        pgd.rect(screen, BACKGROUND_l, [(self.x-35, self.y-35), (70, 40)])
+        pgd.rect(screen, BACKGROUND, [(self.x-35, self.y-35), (70, 40)])
         
     def hp_app(self, x):
-        pgd.rect(screen, BACKGROUND_l, ((x, 20), (120, 15)))
+        pgd.rect(screen, BACKGROUND, ((x, 20), (120, 15)))
         hpx = x
         for i in range(self.hp):
-            pgd.rect(screen, RED_l, ((hpx, 20), (20, 15)))
+            pgd.rect(screen, RED, ((hpx, 20), (20, 15)))
             hpx += 25
     
     def hp_disapp(self, x):
-        pgd.rect(screen, BACKGROUND_l, ((x, 20), (120, 15)))
+        pgd.rect(screen, BACKGROUND, ((x, 20), (120, 15)))
     
     def right(self, x, y, v):
         self.x += self.v
@@ -394,7 +400,6 @@ class Enemy:
         self.l = 20
         self.w = 10
         self.hp = 5
-        self.color = GUN_l
         
     def app(self, obj):
         arctg = m.atan((obj.y-self.y)/(obj.x-self.x))
@@ -404,24 +409,24 @@ class Enemy:
         else:
             x2 = -int(self.l*m.cos(arctg))+self.x
             y2 = int(self.l*m.sin(-arctg))+self.y
-        pgd.rect(screen, self.color, ((self.x-20, self.y-2), (70, 2)))
-        pgd.rect(screen, self.color, ((self.x-10, self.y), (20, 10)))
-        pgd.line(screen, self.color, (self.x, self.y+10), (x2, y2), 5)
+        pgd.rect(screen, GUN_COLOR, ((self.x-20, self.y-2), (70, 2)))
+        pgd.rect(screen, GUN_COLOR, ((self.x-10, self.y), (20, 10)))
+        pgd.line(screen, GUN_COLOR, (self.x, self.y+10), (x2, y2), 5)
         
     def disapp(self):
-        pgd.rect(screen, BACKGROUND_l, ((self.x-20, self.y-2), (70, 2)))
-        pgd.rect(screen, BACKGROUND_l, ((self.x-10, self.y), (20, 10)))
-        pgd.rect(screen, BACKGROUND_l, ((self.x-20, self.y+10), (40, 30)))
+        pgd.rect(screen, BACKGROUND, ((self.x-20, self.y-2), (70, 2)))
+        pgd.rect(screen, BACKGROUND, ((self.x-10, self.y), (20, 10)))
+        pgd.rect(screen, BACKGROUND, ((self.x-20, self.y+10), (40, 30)))
         
     def hp_app(self, x):
-        pgd.rect(screen, BACKGROUND_l, ((x, 20), (150, 15)))
+        pgd.rect(screen, BACKGROUND, ((x, 20), (150, 15)))
         hpx = x
         for i in range(self.hp):
-            pgd.rect(screen, BLUE_l, ((hpx, 20), (10, 15)))
+            pgd.rect(screen, BLUE, ((hpx, 20), (10, 15)))
             hpx += 15
     
     def hp_disapp(self, x):
-        pgd.rect(screen, BACKGROUND_l, ((x, 20), (150, 15)))
+        pgd.rect(screen, BACKGROUND, ((x, 20), (150, 15)))
     
     
 class E_Bullet:
@@ -432,12 +437,13 @@ class E_Bullet:
         self.vx = -int(((size[0]-obj.x)/size[0])*30)
         self.t = 100
         self.r = 7
+        self.theme = 0
         
     def app(self):
-        pgd.circle(screen, (0, 0, 0), (self.x, self.y), self.r)
+        pgd.circle(screen, GUN_COLOR[self.theme], (self.x, self.y), self.r)
 
     def disapp(self):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
+        pgd.circle(screen, BACKGROUND, (self.x, self.y), self.r)
         
     def change(self, obj):
         self.x += self.vx
@@ -457,16 +463,17 @@ class Target:
         self.vx = rnd.randint(3, self.maxv)
         self.vy = rnd.randint(3, self.maxv)
         self.alive = True
-        self.color = TARGET_COLORS_l[5-rnd.randint(1, 5)]
-        self.s1_color = S_COLORS1_l[3-rnd.randint(1, 3)]
-        self.s2_color = S_COLORS2_l[3-rnd.randint(1, 3)]
+        self.color = TARGET_COLORS[5-rnd.randint(1, 5)]
+        self.s1_color = S_COLORS1[3-rnd.randint(1, 3)]
+        self.s2_color = S_COLORS2[3-rnd.randint(1, 3)]
         self.bomb = 0
+        self.theme = 0
         
     def app(self, x, y, r):
         pgd.circle(screen, self.color, (self.x, self.y), self.r)
         
     def disapp(self, x, y, r):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
+        pgd.circle(screen, BACKGROUND, (self.x, self.y), self.r)
         
     def change(self, x, v, r):
         self.x += self.vx
@@ -511,14 +518,15 @@ class Bullet:
         self.t = 100
         self.r = bullet_radius
         self.active = False
-        self.color = RED_l
+        self.color = RED
+        self.theme = 0
         
 
     def app(self, x, y):
         pgd.circle(screen, self.color, (self.x, self.y), self.r)
 
     def disapp(self, x, y):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
+        pgd.circle(screen, BACKGROUND, (self.x, self.y), self.r)
         
     def change(self, x, y, vx, vy, obj):
         self.x -= self.vx
@@ -534,15 +542,16 @@ class Spec_Bullet:
         self.x = obj.x - obj.l
         self.y = obj.y - obj.w
         self.v = v
-        self.color = TARGET_COLORS_l[5-rnd.randint(1, 5)]
+        self.color = TARGET_COLORS[5-rnd.randint(1, 5)]
         self.r = 10
         self.t = 10
+        self.theme = 0
         
     def app(self):
         pgd.circle(screen, self.color, (self.x, self.y), self.r)
         
     def disapp(self):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r)
+        pgd.circle(screen, BACKGROUND, (self.x, self.y), self.r)
         
     def change(self):
         self.y -= self.v
@@ -558,14 +567,15 @@ class Mini_Bullets:
         self.r = 7
         self.t = [60, 60, 60, 60, 60, 60, 60, 60]
         self.color = []
+        self.theme = 0
         for i in range(8):
-            self.color.append(TARGET_COLORS_l[5-rnd.randint(1, 5)])
+            self.color.append(TARGET_COLORS[5-rnd.randint(1, 5)])
         
     def app(self, k):
         pgd.circle(screen, self.color[k], (self.x[k], self.y[k]), self.r)
             
     def disapp(self, k):
-        pgd.circle(screen, BACKGROUND_l, (self.x[k], self.y[k]), self.r)
+        pgd.circle(screen, BACKGROUND, (self.x[k], self.y[k]), self.r)
     
     def change(self, k):
         self.x[k] += self.vx[k]
@@ -578,16 +588,17 @@ class Bomb:
         self.x = obj.x
         self.y = obj.y
         self.v = 1
-        self.color = TARGET_COLORS_l[5-rnd.randint(1, 5)]
+        self.color = TARGET_COLORS[5-rnd.randint(1, 5)]
         self.r = 7
         self.act = True
+        self.theme = 0
         
     def app(self):
         pgd.circle(screen, self.color, (self.x, self.y), self.r)
         pgd.circle(screen, (0, 0, 0), (self.x, self.y), self.r, 2)
         
     def disapp(self):
-        pgd.circle(screen, BACKGROUND_l, (self.x, self.y), self.r+1)
+        pgd.circle(screen, BACKGROUND, (self.x, self.y), self.r+1)
         
     def change_coords(self):
         self.y += self.v
@@ -599,16 +610,17 @@ class Location:
         self.plain_type = plain_type
         self.k = 0.75
         self.size = size[1]
+        self.theme = 0
         
     def appear(self, plain_type):
         if self.plain_type:
-            pgd.rect(screen, LOC_COLOR_l, [(0, int(self.size*self.k)), (size[0], int(self.size*(1-self.k)))])
+            pgd.rect(screen, LOC_COLOR[self.theme], [(0, int(self.size*self.k)), (size[0], int(self.size*(1-self.k)))])
         else:
             pass
             
     def disappear(self, plain_type):
         if self.plain_type:
-            pgd.rect(screen, BACKGROUND_l, [(0, int(self.size*self.k)), (size[0], int(self.size*(1-self.k)))])
+            pgd.rect(screen, BACKGROUND, [(0, int(self.size*self.k)), (size[0], int(self.size*(1-self.k)))])
         else:
             pass      
         
@@ -708,25 +720,25 @@ global size
 size = (683, 557)
 screen = pg.display.set_mode(size)
 font = pg.font.Font(None, 25)
-begin = font.render('New game', True, (255, 255, 255))
-settings = font.render('Settings', True, (255, 255, 255))
-exitt = font.render('Exit', True, (255, 255, 255))
-returnn = font.render('Return', True, (255, 255, 255))
-difficulty_txt = font.render('Difficulty', True, (255, 255, 255))
-theme = font.render('Theme', True, (255, 255, 255))
-location = font.render('Location', True, (255, 255, 255))
-game_duration = font.render('Game time', True, (255, 255, 255)) 
-sec10 = font.render('10 s', True, (255, 255, 255))
-sec20 = font.render('20 s', True, (255, 255, 255))
-sec30 = font.render('30 s', True, (255, 255, 255))
-sec60 = font.render('60 s', True, (255, 255, 255))
-hard = font.render('Hard', True, (255, 255, 255))
-medium = font.render('Medium', True, (255, 255, 255))
-easy = font.render('Easy', True, (255, 255, 255))
-hills = font.render('Hills', True, (255, 255, 255))
-plain = font.render('Plain', True, (255, 255, 255))
-dark = font.render('Dark', True, (255, 255, 255))
-light = font.render('Light', True, (255, 255, 255))
+begin = font.render('New game', True, (0, 0, 0))
+settings = font.render('Settings', True, (0, 0, 0))
+exitt = font.render('Exit', True, (0, 0, 0))
+returnn = font.render('Return', True, (0, 0, 0))
+difficulty_txt = font.render('Difficulty', True, (0, 0, 0))
+theme = font.render('Theme', True, (0, 0, 0))
+location = font.render('Location', True, (0, 0, 0))
+game_duration = font.render('Game time', True, (0, 0, 0)) 
+sec10 = font.render('10 s', True, (0, 0, 0))
+sec20 = font.render('20 s', True, (0, 0, 0))
+sec30 = font.render('30 s', True, (0, 0, 0))
+sec60 = font.render('60 s', True, (0, 0, 0))
+hard = font.render('Hard', True, (0, 0, 0))
+medium = font.render('Medium', True, (0, 0, 0))
+easy = font.render('Easy', True, (0, 0, 0))
+hills = font.render('Hills', True, (0, 0, 0))
+plain = font.render('Plain', True, (0, 0, 0))
+dark = font.render('Dark', True, (0, 0, 0))
+light = font.render('Light', True, (0, 0, 0))
 lost = font.render('YOU LOST', True, (0, 0, 0))
 
 pg.display.update()
@@ -776,7 +788,7 @@ loc_mode = True
 difficulty = 0
 
 #defining objects in the game
-time_bar = Time_bar(game_time, size[0], BACKGROUND_l)
+time_bar = Time_bar(game_time, size[0], BACKGROUND)
 main_menu = Main_menu(main_menu_size)
 settings_menu = Settings(settings_size)
 gt_menu = Gt_menu(gt_menu_size)
@@ -798,7 +810,9 @@ for i in range(tg_amounts):
     sp_targets.append(Target())
 bombs = []
 loc = Location(loc_mode)
-screen.fill(BACKGROUND_l)
+game_objects = [time_bar, main_menu, settings_menu, gt_menu, d_menu, l_menu,
+                t_menu, enemy_gun, loc]
+screen.fill(BACKGROUND)
 
 while not finished:
     clock.tick(FPS)
@@ -927,9 +941,13 @@ while not finished:
                 if event.button == 1 and t_menu.button_dark_check(t_menu_size, event):
                     settings_mode = True
                     t_menu_mode = False
+                    for elem in game_objects:
+                        elem.theme = 1
                 if event.button == 1 and t_menu.button_light_check(t_menu_size, event):
                     settings_mode = True
                     t_menu_mode = False
+                    for elem in game_objects:
+                        elem.theme = 0
     if main_menu_mode:
         menu_appear(main_menu, main_menu_size)
         pg.display.update()
@@ -1031,7 +1049,7 @@ while not finished:
         if gun.hp == 0:
             time_bar.disappear(size[0])
             time_bar.length = 0
-            screen.fill(BACKGROUND_l)
+            screen.fill(BACKGROUND)
             screen.blit(lost, (size[0]//2-40, size[1]//2))
             pg.display.update()
             pg.time.wait(500)
@@ -1044,7 +1062,7 @@ while not finished:
             enemy_gun.hp_app(size[0]-200)
             enemy_gun.app(gun)
             if enemy_gun.hp == 0:
-                enemy_gun.color = RED_l
+                enemy_gun.color = RED
             for elem in bullets:
                 l = enemy_gun.l+elem.r
                 w = enemy_gun.w+elem.r
@@ -1073,7 +1091,7 @@ while not finished:
         gun.hp_disapp(20)
         enemy_gun.hp_disapp(size[0]-200)
         enemy_gun.hp = 10
-        enemy_gun.color = GUN_l
+        enemy_gun.color = GUN_COLOR
         loc.disappear(loc_mode)
         for elem in spec_bullets:
             elem.disapp()
@@ -1125,7 +1143,7 @@ while not finished:
                 target.maxv = 9
             freq = 30
             enemy_gun_active = True
-        screen.fill(BACKGROUND_l)
+        screen.fill(BACKGROUND)
     
 pg.time.wait(500)
 pg.quit()
