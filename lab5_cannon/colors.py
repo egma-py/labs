@@ -1,3 +1,7 @@
+"""
+colors in a game
+they are in lists because it's convenient to change theme such way
+"""
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (57, 255, 20) 
@@ -15,6 +19,3 @@ GUN_COLOR = (0, 0, 0)
 TARGET_COLORS = [RED, GREEN, BLUE, BLACK, (255, 255, 0)]
 S_COLORS1 = [RED, GREEN, BLUE]
 S_COLORS2 = [YELLOW, ORANGE, BROWN]
-#BUTTON_COLOR_l = ()
-#TEXT_COLOR_l = ()
-#BULLET_COLOR = ()
