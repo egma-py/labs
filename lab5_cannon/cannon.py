@@ -77,9 +77,9 @@ def hittest(bullett, targett):
         return False
 
 #hittest of minibullets
-def spec_hittest(bullett, targett):
-    s = m.sqrt((bullett.x[i]-targett.x)**2+(bullett.y[i]-targett.y)**2)
-    if s < (bullett.r + targett.r):
+def spec_hittest(bullet, target):
+    s = m.sqrt((bullet.x[i]-target.x)**2+(bullet.y[i]-target.y)**2)
+    if s < (bullet.r + target.r):
         return True
     else:
         return False    

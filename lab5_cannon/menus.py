@@ -43,19 +43,37 @@ class MainMenu:
             self.size_x = 0
             
     def button_b_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2) and event.pos[1]<(size[1]//2+35):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2)
+        b_down = (size[1]//2+35)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_e_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2+100) and event.pos[1]<(size[1]//2+135):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2+100)
+        b_down = (size[1]//2+135)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_s_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2+50) and event.pos[1]<(size[1]//2+85):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2+50)
+        b_down = (size[1]//2+85)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False                   
@@ -98,31 +116,61 @@ class Settings:
             self.size_x = 0
             
     def button_r_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2+100) and event.pos[1]<(size[1]//2+135):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2+100)
+        b_down = (size[1]//2+135)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
     
     def button_gt_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-100) and event.pos[1]<(size[1]//2-65):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-100)
+        b_down = (size[1]//2-65)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
     
     def button_d_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-50) and event.pos[1]<(size[1]//2-15):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-50)
+        b_down = (size[1]//2-15)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
     
     def button_t_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2) and event.pos[1]<(size[1]//2+35):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2)
+        b_down = (size[1]//2+35)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
     
     def button_l_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2+50) and event.pos[1]<(size[1]//2+85):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2+50)
+        b_down = (size[1]//2+85)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
@@ -157,25 +205,49 @@ class GtMenu:
             self.size_x = int(size[0]*0.375)
             
     def button_10_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-100) and event.pos[1]<(size[1]//2-65):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-100)
+        b_down = (size[1]//2-65)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_20_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-50) and event.pos[1]<(size[1]//2-15):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-50)
+        b_down = (size[1]//2-15)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
 
     def button_30_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2) and event.pos[1]<(size[1]//2+35):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2)
+        b_down = (size[1]//2+35)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_60_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2+50) and event.pos[1]<(size[1]//2+85):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2+50)
+        b_down = (size[1]//2+85)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
@@ -207,19 +279,37 @@ class DMenu:
             self.size_x = int(size[0]*0.375)
             
     def button_e_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-100) and event.pos[1]<(size[1]//2-65):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-100)
+        b_down = (size[1]//2-65)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_m_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-50) and event.pos[1]<(size[1]//2-15):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-50)
+        b_down = (size[1]//2-15)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
 
     def button_h_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2) and event.pos[1]<(size[1]//2+35):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2)
+        b_down = (size[1]//2+35)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
@@ -248,13 +338,25 @@ class LMenu:
             self.size_x = int(size[0]*0.375)
             
     def button_plain_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-100) and event.pos[1]<(size[1]//2-65):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-100)
+        b_down = (size[1]//2-65)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_hills_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-50) and event.pos[1]<(size[1]//2-15):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-50)
+        b_down = (size[1]//2-15)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
@@ -283,13 +385,25 @@ class TMenu:
             self.size_x = int(size[0]*0.375)
             
     def button_dark_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-100) and event.pos[1]<(size[1]//2-65):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-100)
+        b_down = (size[1]//2-65)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
         
     def button_light_check(self, event, size):
-        if event.pos[0]>(size[0]-int(1.5*self.size_x-210)) and event.pos[0]<(size[0]-int(1.5*self.size_x-210)+100) and event.pos[1]>(size[1]//2-50) and event.pos[1]<(size[1]//2-15):
+        pos_x = event.pos[0]
+        pos_y = event.pos[1]
+        b_left = (size[0]-int(1.5*self.size_x-210))
+        b_right = (size[0]-int(1.5*self.size_x-210)+100)
+        b_up = (size[1]//2-50)
+        b_down = (size[1]//2-15)
+        if b_right > pos_x > b_left and  b_down > pos_y > b_up:
             return True
         else:
             return False
